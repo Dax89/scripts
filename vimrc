@@ -130,7 +130,8 @@ colorscheme gruvbox
 
 " GUI Window Size
 if has("gui_running")
-  winpos 510 155 " Center window on screen
+  " winpos 510 155 " Center window on screen (1920x1080)
+  winpos 800 155   " Center window on screen (2560x1080)
   set columns=110 lines=40
 
   " Remove menubar, tearoffs and toolbar
