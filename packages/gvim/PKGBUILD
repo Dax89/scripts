@@ -1,0 +1,45 @@
+# 
+# Maintainer: Antonio Davide Trogu <trogu.davide at gmail dot com>
+# Vim compiled with UI support
+# 
+
+# Notes:
+# http://vim.wikia.com/wiki/Building_Vim
+#
+
+pkgname=gvim
+pkgver=8.1.0001
+pkgrel=1
+pkgdesc="Vi Improved, a highly configurable, improved version of the vi text editor (GUI version)"
+arch=("x86_64")
+url="http://www.vim.org"
+license=("custom:vim")
+makedepends=("git")
+conflicts=("vi" "vim" "vim-runtime")
+provides=("vi" "vim" "vim-runtime") 
+
+depends=("glib2" "cairo" "gtk2"
+         "libpng"
+         "fontconfig" "zlib")
+
+_tarball="vim_v${pkgver}.tar.gz"
+_srcfolder="vim-${pkgver}"
+
+source=("${_tarball}::https://github.com/vim/vim/archive/v${pkgver}.tar.gz")
+md5sums=('edb6f5c67cb3100ea9e3966a43b9c9da')
+
+build() {
+    cd $srcdir/$_srcfolder
+    ./configure --prefix=/usr --with-features=huge --enable-gui=gnome2
+    make -j8
+}
+
+package() {
+    cd $srcdir/$_srcfolder
+    make DESTDIR=$pkgdir install
+
+    # Install license
+    install -Dm644 "${srcdir}/${_srcfolder}/runtime/doc/uganda.txt" \
+                   "${pkgdir}/usr/share/licenses/${pkgbase}/LICENSE.TXT"
+
+}
