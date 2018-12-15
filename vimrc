@@ -70,8 +70,8 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 1
-let g:jedi#rename_command = "F3"
-let g:jedi#show_usages = "F4"
+let g:jedi#rename_command = "<F3>"
+let g:jedi#show_usages = "<F4>"
 
 nmap <F6> :GundoToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
