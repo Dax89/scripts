@@ -1,9 +1,6 @@
 " External dependencies
-" System Packages: python2-pip python3-pip ctags cscope clang
+" System Packages: ctags cscope
 " TagBar: ctags
-" Deoplete: pip3 install --user neovim
-" Deoplete TernJS: npm install -g tern
-" Deoplete CLang: clang, pip3 install --user clang
 
 call plug#begin('~/.vim/plugins')
   " UI
@@ -22,11 +19,13 @@ call plug#begin('~/.vim/plugins')
   Plug 'indiofish/auto-pairs'
   Plug 'triglav/vim-visual-increment'
   Plug 'godlygeek/tabular'
-  Plug 'ervandew/supertab'
 
   " Syntax Highlighting
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
+
+  " Completion
+  Plug 'davidhalter/jedi-vim'
 
   " Modes
   Plug 'fidian/hexmode'
@@ -54,6 +53,7 @@ set wildmenu
 set nobackup
 set noswapfile
 set hidden
+set splitbelow
 
 syntax on
 
@@ -61,8 +61,6 @@ syntax on
 let mapleader = " "
 let g:gruvbox_contrast_dark = 'hard'
 let g:cscope_silent = 1
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python2'
 let g:airline_powerline_fonts = 1 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
@@ -70,7 +68,10 @@ let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:jedi#auto_initialization = 1
+let g:jedi#auto_vim_configuration = 1
+let g:jedi#rename_command = "F3"
+let g:jedi#show_usages = "F4"
 
 nmap <F6> :GundoToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
@@ -131,7 +132,7 @@ colorscheme gruvbox
 " GUI Window Size
 if has("gui_running")
   " winpos 510 155 " Center window on screen (1920x1080)
-  winpos 800 155   " Center window on screen (2560x1080)
+  winpos 700 100   " Center window on screen (2560x1080)
   set columns=110 lines=40
 
   " Remove menubar, tearoffs and toolbar
