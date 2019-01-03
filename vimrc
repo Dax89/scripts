@@ -95,7 +95,8 @@ nnoremap <leader>m :MatchmakerToggle<CR>
 nnoremap <leader>sf :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>st :call ToggleLocationList()<CR>
 
-nmap <leader><leader>c :e $MYVIMRC<CR>
+nmap <leader><leader>cs :source $MYVIMRC<CR>
+nmap <leader><leader>cc :e $MYVIMRC<CR>
 nmap <leader><leader>x :Hexmode<CR>
 nmap <leader><leader>wd :set list \| set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<<CR>
 nmap <leader><leader>wh :set nolist<CR>
@@ -139,6 +140,6 @@ if has("gui_running")
 
   " Remove menubar, tearoffs and toolbar
   set guioptions=
-  set guifont=Fira\ Code\ 13
+  set guifont=Fira\ Mono\ 13
 endif
 
