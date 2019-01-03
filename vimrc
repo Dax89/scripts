@@ -24,15 +24,16 @@ call plug#begin('~/.vim/plugins')
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
 
-  " Completion
-  Plug 'davidhalter/jedi-vim'
-
   " Modes
   Plug 'fidian/hexmode'
 
   " Theme
   Plug 'orthecreedence/void.vim'
   Plug 'morhetz/gruvbox'
+  "
+  " Python
+  Plug 'davidhalter/jedi-vim'
+  Plug 'vim-python/python-syntax'
 call plug#end()
 
 " General Vim settings
@@ -72,6 +73,7 @@ let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#rename_command = "<F3>"
 let g:jedi#show_usages = "<F4>"
+let g:python_highlight_all = 1
 
 nmap <F6> :GundoToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
