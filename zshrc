@@ -17,23 +17,17 @@ compinit
 export EDITOR='vim'
 
 # Antigen
-#export ANTIGEN_AUTO_CONFIG=false
-source .zsh/antigen.zsh
-
-#export ALIEN_THEME="soft"
-export USE_NERD_FONT=1
-
+source ~/.zsh/antigen.zsh
 antigen use oh-my-zsh
 
-antigen bundle <<EOBUNDLES 
-	git
-	vim-interaction
-	command-not-found
-	zsh-users/zsh-syntax-highlighting
-EOBUNDLES
+export SPACESHIP_GIT_SHOW=false
 
-antigen theme eendroroy/alien alien
+antigen bundle vim-interaction
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting 
+antigen bundle zsh-users/zsh-autosuggestions
+
+antigen theme denysdovhan/spaceship-prompt
 antigen apply
-
 # End of Antigen
 
