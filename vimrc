@@ -22,10 +22,7 @@ call plug#begin('~/.vim/plugins')
 
   " Syntax Highlighting
   Plug 'jquintus/vim-log-syntax'
-  Plug 'sheerun/vim-polyglot'
-
-  " Completion
-  Plug 'davidhalter/jedi-vim'
+  Plug 'peterhoeg/vim-qml'
 
   " Modes
   Plug 'fidian/hexmode'
@@ -33,6 +30,10 @@ call plug#begin('~/.vim/plugins')
   " Theme
   Plug 'orthecreedence/void.vim'
   Plug 'morhetz/gruvbox'
+  "
+  " Python
+  Plug 'davidhalter/jedi-vim'
+  Plug 'vim-python/python-syntax'
 call plug#end()
 
 " General Vim settings
@@ -40,6 +41,7 @@ set nocompatible
 set cursorline
 set clipboard=unnamedplus
 set cmdheight=2
+set completeopt+=longest,menuone
 set hlsearch
 set ignorecase
 set laststatus=2
@@ -71,6 +73,7 @@ let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#rename_command = "<F3>"
 let g:jedi#show_usages = "<F4>"
+let g:python_highlight_all = 1
 
 nmap <F6> :GundoToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
@@ -82,6 +85,8 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <SPACE> <Nop>
 
+map <Leader> <Plug>(easymotion-prefix)
+
 nnoremap <leader>a ggVG<CR>
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>h :sp<CR>
@@ -89,10 +94,12 @@ nnoremap <leader>q :<C-q>q<CR>
 nnoremap <leader>nhl :set nohlsearch<CR>
 nnoremap <leader>hl :set hlsearch<CR>
 nnoremap <leader>m :MatchmakerToggle<CR>
-nnoremap <leader>sf :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>st :call ToggleLocationList()<CR>
 
-nmap <leader><leader>c :e $MYVIMRC<CR>
+nnoremap <leader><leader>sf :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader><leader>st :call ToggleLocationList()<CR>
+
+nmap <leader><leader>cs :source $MYVIMRC<CR>
+nmap <leader><leader>cc :e $MYVIMRC<CR>
 nmap <leader><leader>x :Hexmode<CR>
 nmap <leader><leader>wd :set list \| set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<<CR>
 nmap <leader><leader>wh :set nolist<CR>
