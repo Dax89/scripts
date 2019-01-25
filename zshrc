@@ -21,6 +21,7 @@ source ~/.zsh/antigen.zsh
 antigen use oh-my-zsh
 
 export SPACESHIP_GIT_SHOW=false
+export SPACESHIP_BATTERY_SHOW=false
 
 antigen bundle vim-interaction
 antigen bundle command-not-found
