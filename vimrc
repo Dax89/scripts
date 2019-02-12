@@ -19,8 +19,10 @@ call plug#begin('~/.vim/plugins')
   Plug 'indiofish/auto-pairs'
   Plug 'triglav/vim-visual-increment'
   Plug 'godlygeek/tabular'
+  Plug 'rr-/vim-hexdec'
 
   " Syntax Highlighting
+  Plug 'zchee/vim-flatbuffers'
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
 
