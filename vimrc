@@ -29,6 +29,12 @@ call plug#begin('~/.vim/plugins')
   " Modes
   Plug 'fidian/hexmode'
 
+  " Vim OrgMode
+  Plug 'vim-scripts/utl.vim'
+  Plug 'tpope/vim-speeddating'
+  Plug 'jceb/vim-orgmode'
+  Plug 'mattn/calendar-vim'
+
   " Theme
   Plug 'orthecreedence/void.vim'
   Plug 'morhetz/gruvbox'
@@ -62,6 +68,7 @@ syntax on
 
 " Plugin Initializations
 let mapleader = " "
+let maplocalleader = " "
 let g:gruvbox_contrast_dark = 'hard'
 let g:cscope_silent = 1
 let g:airline_powerline_fonts = 1 
@@ -87,8 +94,6 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <SPACE> <Nop>
 
-map <Leader> <Plug>(easymotion-prefix)
-
 nnoremap <leader>a ggVG<CR>
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>h :sp<CR>
@@ -100,18 +105,18 @@ nnoremap <leader>m :MatchmakerToggle<CR>
 nnoremap <leader><leader>sf :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader><leader>st :call ToggleLocationList()<CR>
 
-nmap <leader><leader>cs :source $MYVIMRC<CR>
-nmap <leader><leader>cc :e $MYVIMRC<CR>
-nmap <leader><leader>x :Hexmode<CR>
-nmap <leader><leader>wd :set list \| set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<<CR>
-nmap <leader><leader>wh :set nolist<CR>
-nmap <leader><leader>pi :PlugInstall<CR>
-nmap <leader><leader>pc :PlugClean<CR>
-nmap <leader><leader>pd :PlugUpdate<CR>
-nmap <leader><leader>pg :PlugUpgrade<CR>
-nmap <leader><leader>pr :UpdateRemotePlugins<CR>
-nmap <leader><leader>nhl :set nohlsearch<CR>
-nmap <leader><leader>hl :set hlsearch<CR>
+nmap <leader><leader><leader>cs :source $MYVIMRC<CR>
+nmap <leader><leader><leader>cc :e $MYVIMRC<CR>
+nmap <leader><leader><leader>x :Hexmode<CR>
+nmap <leader><leader><leader>wd :set list \| set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<<CR>
+nmap <leader><leader><leader>wh :set nolist<CR>
+nmap <leader><leader><leader>pi :PlugInstall<CR>
+nmap <leader><leader><leader>pc :PlugClean<CR>
+nmap <leader><leader><leader>pd :PlugUpdate<CR>
+nmap <leader><leader><leader>pg :PlugUpgrade<CR>
+nmap <leader><leader><leader>pr :UpdateRemotePlugins<CR>
+nmap <leader><leader><leader>nhl :set nohlsearch<CR>
+nmap <leader><leader><leader>hl :set hlsearch<CR>
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
