@@ -2,33 +2,61 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd extendedglob notify
-unsetopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/davide/.zshrc'
+export ZPLUG_HOME=$HOME/.zplug
+source $ZPLUG_HOME/init.zsh
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# -------- *** KEYBINDS *** -------- #
+typeset -A key
+key=(
+  BackSpace  "${terminfo[kbs]}"
+  Home       "${terminfo[khome]}"
+  End        "${terminfo[kend]}"
+  Insert     "${terminfo[kich1]}"
+  Delete     "${terminfo[kdch1]}"
+  Up         "${terminfo[kcuu1]}"
+  Down       "${terminfo[kcud1]}"
+  Left       "${terminfo[kcub1]}"
+  Right      "${terminfo[kcuf1]}"
+  PageUp     "${terminfo[kpp]}"
+  PageDown   "${terminfo[knp]}"
+)
 
-export EDITOR='vim'
+# Setup key accordingly
+[[ -n "${key[BackSpace]}" ]] && bindkey "${key[BackSpace]}" backward-delete-char
+[[ -n "${key[Home]}"      ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey "${key[End]}" end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n "${key[Delete]}"    ]] && bindkey "${key[Delete]}" delete-char
+[[ -n "${key[Up]}"        ]] && bindkey "${key[Up]}" up-line-or-beginning-search
+[[ -n "${key[Down]}"      ]] && bindkey "${key[Down]}" down-line-or-beginning-search
+[[ -n "${key[PageUp]}"    ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
+[[ -n "${key[Home]}"      ]] && bindkey -M vicmd "${key[Home]}" beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -M vicmd "${key[End]}" end-of-line
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+# -------- *** KEYBINDS *** -------- #
 
-# Antigen
-source ~/.zsh/antigen.zsh
-antigen use oh-my-zsh
+# -------- *** PLUGIN SECTION *** -------- #
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "dracula/zsh", as:theme
+# -------- *** PLUGIN SECTION *** -------- #
 
-export SPACESHIP_GIT_SHOW=false
-export SPACESHIP_BATTERY_SHOW=false
+# Install plugins if there are plugins that have not been installed
+if ! zplug check; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
-antigen bundle vim-interaction
-antigen bundle command-not-found
-antigen bundle zsh-users/zsh-syntax-highlighting 
-antigen bundle zsh-users/zsh-autosuggestions
+# Then, source plugins and add commands to $PATH
+zplug load
 
-antigen theme denysdovhan/spaceship-prompt
-antigen apply
-# End of Antigen
-
+ZSH_THEME="dracula"

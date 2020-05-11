@@ -1,47 +1,39 @@
 " External dependencies
-" System Packages: ctags cscope
+" System Packages: ctags prettier fzf ripgrep
+" VimPrettier: prettier
 " TagBar: ctags
 
 call plug#begin('~/.vim/plugins')
   " UI
+  Plug 'mhinz/vim-startify'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'easymotion/vim-easymotion'
   Plug 'scrooloose/nerdtree'
-  Plug 'vim-scripts/Gundo'
-  Plug 'ctrlpvim/ctrlp.vim'
+
+  " Navigation
+  Plug 'junegunn/fzf'
+  Plug 'dyng/ctrlsf.vim'
 
   " Code
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'jiangmiao/auto-pairs'
   Plug 'qstrahl/vim-matchmaker'
   Plug 'tpope/vim-surround'
   Plug 'luochen1990/indent-detector.vim'
   Plug 'majutsushi/tagbar'
-  Plug 'brookhong/cscope.vim'
-  Plug 'indiofish/auto-pairs'
-  Plug 'triglav/vim-visual-increment'
-  Plug 'godlygeek/tabular'
-  Plug 'rr-/vim-hexdec'
 
   " Syntax Highlighting
-  Plug 'zchee/vim-flatbuffers'
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
 
   " Modes
   Plug 'fidian/hexmode'
 
-  " Vim OrgMode
-  Plug 'vim-scripts/utl.vim'
-  Plug 'tpope/vim-speeddating'
-  Plug 'jceb/vim-orgmode'
-  Plug 'mattn/calendar-vim'
-
   " Theme
-  Plug 'orthecreedence/void.vim'
-  Plug 'morhetz/gruvbox'
-  "
-  " Python
-  Plug 'davidhalter/jedi-vim'
-  Plug 'vim-python/python-syntax'
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " General Vim settings
@@ -69,22 +61,32 @@ syntax on
 " Plugin Initializations
 let mapleader = " "
 let maplocalleader = " "
-let g:gruvbox_contrast_dark = 'hard'
-let g:cscope_silent = 1
-let g:airline_powerline_fonts = 1 
+let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_search_mode = 'async'
+let g:ctrlsf_position = 'bottom'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:jedi#auto_initialization = 1
-let g:jedi#auto_vim_configuration = 1
-let g:jedi#rename_command = "<F3>"
-let g:jedi#show_usages = "<F4>"
-let g:python_highlight_all = 1
+let g:airline_powerline_fonts = 1 
+let g:buffet_always_show_tabline = 0
+let g:buffet_show_index = 1
 
-nmap <F6> :GundoToggle<CR>
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+
+let g:startify_custom_header = [
+      \ ' __     ___            ',
+      \ ' \ \   / (_)_ __ ___   ',
+      \ '  \ \ / /| | ''_ ` _ \ ',
+      \ '   \ V / | | | | | | | ',
+      \ '    \_/  |_|_| |_| |_| ',
+      \ '',
+      \ '' ]
+
 nmap <F7> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 
@@ -98,25 +100,19 @@ nnoremap <leader>a ggVG<CR>
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>h :sp<CR>
 nnoremap <leader>q :<C-q>q<CR>
-nnoremap <leader>nhl :set nohlsearch<CR>
-nnoremap <leader>hl :set hlsearch<CR>
 nnoremap <leader>m :MatchmakerToggle<CR>
 
-nnoremap <leader><leader>sf :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader><leader>st :call ToggleLocationList()<CR>
 
-nmap <leader><leader><leader>cs :source $MYVIMRC<CR>
-nmap <leader><leader><leader>cc :e $MYVIMRC<CR>
-nmap <leader><leader><leader>x :Hexmode<CR>
-nmap <leader><leader><leader>wd :set list \| set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<<CR>
-nmap <leader><leader><leader>wh :set nolist<CR>
-nmap <leader><leader><leader>pi :PlugInstall<CR>
-nmap <leader><leader><leader>pc :PlugClean<CR>
-nmap <leader><leader><leader>pd :PlugUpdate<CR>
-nmap <leader><leader><leader>pg :PlugUpgrade<CR>
-nmap <leader><leader><leader>pr :UpdateRemotePlugins<CR>
-nmap <leader><leader><leader>nhl :set nohlsearch<CR>
-nmap <leader><leader><leader>hl :set hlsearch<CR>
+nnoremap <C-f> :CtrlSF<CR>
+nnoremap <C-p> :FZF<CR>
+nmap <leader><leader>cs :source $MYVIMRC<CR>
+nmap <leader><leader>cc :e $MYVIMRC<CR>
+nmap <leader><leader>x :Hexmode<CR>
+nmap <leader><leader>pi :PlugInstall<CR>
+nmap <leader><leader>pc :PlugClean<CR>
+nmap <leader><leader>pd :PlugUpdate<CR>
+nmap <leader><leader>pg :PlugUpgrade<CR>
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -130,17 +126,8 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>+ :enew<CR>
 nmap <leader>- :bp<BAR>:bd! #<CR>
 
-nmap <leader>t= :Tabularize /=<CR>
-vmap <leader>t= :Tabularize /=<CR>
-nmap <leader>t: :Tabularize /:<CR>
-vmap <leader>t: :Tabularize /:<CR>
-nmap <leader>t\| :Tabularize /\|<CR>
-vmap <leader>t\| :Tabularize /\|<CR>
-nmap <leader>t, :Tabularize /,<CR>
-vmap <leader>t, :Tabularize /,<CR>
-
-set background=dark
-colorscheme gruvbox
+" set background=dark
+colorscheme dracula
 
 " GUI Window Size
 if has("gui_running")
