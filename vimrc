@@ -1,6 +1,8 @@
 " External dependencies
 " System Packages: ctags prettier fzf ripgrep
-" Language Servers: clang python-language-server
+" Manual Language Servers: coc-tsserver coc-tsline-plugin coc-cmake coc-rls
+" System Language Servers: clang python-language-server
+" VimPrettier: prettier
 " TagBar: ctags
 
 call plug#begin('~/.vim/plugins')
@@ -18,6 +20,7 @@ call plug#begin('~/.vim/plugins')
 
   " Code
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'jiangmiao/auto-pairs'
   Plug 'qstrahl/vim-matchmaker'
   Plug 'tpope/vim-surround'
@@ -25,8 +28,10 @@ call plug#begin('~/.vim/plugins')
   Plug 'majutsushi/tagbar'
 
   " Syntax Highlighting
+  Plug 'mechatroner/rainbow_csv'
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
+  Plug 'HerringtonDarkholme/yats.vim'
 
   " Modes
   Plug 'fidian/hexmode'
@@ -77,8 +82,6 @@ endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" nmap <silent> [c <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]c <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -117,27 +120,7 @@ command! -nargs=? Fold   :call CocAction('fold', <f-args>)
 command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " *** CoC.NVim settings ***
-
-" *** TagBar JSON Support ***
-let g:tagbar_type_json = {
-      \ 'ctagstype' : 'json',
-      \ 'kinds' : [ 'o:objects', 'a:arrays', 'n:numbers', 's:strings', 'b:booleans', 'z:nulls' ],
-      \ 'sro' : '.',
-      \ 'scope2kind': { 'object': 'o', 'array': 'a', 'number': 'n', 'string': 's', 'boolean': 'b', 'null': 'z' },
-      \ 'kind2scope': { 'o': 'object', 'a': 'array', 'n': 'number', 's': 'string', 'b': 'boolean', 'z': 'null' },
-      \ 'sort' : 0
-      \ }
-" *** TagBar JSON Support ***
 
 syntax on
 
@@ -184,6 +167,7 @@ nnoremap <leader>v :vsp<CR>
 nnoremap <leader>h :sp<CR>
 nnoremap <leader>q :<C-q>q<CR>
 nnoremap <leader>m :MatchmakerToggle<CR>
+nnoremap <leader>s :Startify<CR>
 
 nnoremap <leader><leader>st :call ToggleLocationList()<CR>
 
