@@ -32,13 +32,14 @@ call plug#begin('~/.vim/plugins')
   Plug 'jquintus/vim-log-syntax'
   Plug 'peterhoeg/vim-qml'
   Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'pangloss/vim-javascript'
 
   " Modes
   Plug 'fidian/hexmode'
 
   " Theme
-  Plug 'altercation/vim-colors-solarized'
   Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 " General Vim settings
@@ -193,8 +194,8 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>+ :enew<CR>
 nmap <leader>- :bp<BAR>:bd! #<CR>
 
-" set background=dark
-colorscheme dracula
+set background=light
+colorscheme PaperColor
 
 " GUI Window Size
 if has("gui_running")
