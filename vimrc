@@ -1,8 +1,7 @@
 " External dependencies
-" System Packages: ctags prettier fzf ripgrep
+" System Packages: ctags fzf ripgrep
 " Manual Language Servers: coc-tsserver coc-tsline-plugin coc-cmake coc-rls
 " System Language Servers: clang python-language-server
-" VimPrettier: prettier
 " TagBar: ctags
 
 call plug#begin('~/.vim/plugins')
@@ -16,11 +15,9 @@ call plug#begin('~/.vim/plugins')
 
   " Navigation
   Plug 'junegunn/fzf'
-  Plug 'dyng/ctrlsf.vim'
 
   " Code
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'jiangmiao/auto-pairs'
   Plug 'qstrahl/vim-matchmaker'
   Plug 'tpope/vim-surround'
@@ -38,7 +35,6 @@ call plug#begin('~/.vim/plugins')
   Plug 'fidian/hexmode'
 
   " Theme
-  Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
@@ -120,30 +116,39 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold   :call CocAction('fold', <f-args>)
 command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " *** CoC.NVim settings ***
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 syntax on
 
 " Plugin Initializations
 let mapleader = " "
 let maplocalleader = " "
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_search_mode = 'async'
-let g:ctrlsf_position = 'bottom'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 1 
-let g:buffet_always_show_tabline = 0
-let g:buffet_show_index = 1
+let NERDTreeMinimalUI = 1
+let g:tagbar_compact = 1
+let g:tagbar_expand = 1
+let g:tagbar_singleclick = 1
 
-let g:ctrlsf_auto_focus = {
-    \ "at": "start"
-    \ }
+let g:airline_powerline_fonts = 0 
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+let g:airline#extensions#tabline#buffer_idx_format = {
+      \ '0': '0 ',
+      \ '1': '1 ',
+      \ '2': '2 ',
+      \ '3': '3 ',
+      \ '4': '4 ',
+      \ '5': '5 ',
+      \ '6': '6 ',
+      \ '7': '7 ',
+      \ '8': '8 ',
+      \ '9': '9 '
+      \}
 
 let g:startify_custom_header = [
       \ ' __     ___            ',
@@ -194,7 +199,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>+ :enew<CR>
 nmap <leader>- :bp<BAR>:bd! #<CR>
 
-set background=light
+set background=dark
 colorscheme PaperColor
 
 " GUI Window Size
@@ -205,6 +210,6 @@ if has("gui_running")
 
   " Remove menubar, tearoffs and toolbar
   set guioptions=
-  set guifont=Fira\ Mono\ 13
+  set guifont=Fira\ Code\ 14
 endif
 
