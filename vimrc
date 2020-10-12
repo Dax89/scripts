@@ -8,8 +8,8 @@ call plug#begin('~/.vim/plugins')
   " UI
   Plug 'mhinz/vim-startify'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
   Plug 'easymotion/vim-easymotion'
   Plug 'scrooloose/nerdtree'
 
@@ -43,7 +43,7 @@ call plug#end()
 set nocompatible
 set cursorline
 set clipboard=unnamedplus
-set cmdheight=2
+set cmdheight=1
 set completeopt+=longest,menuone
 set hlsearch
 set ignorecase
@@ -59,6 +59,8 @@ set noswapfile
 set hidden
 set splitbelow
 set foldcolumn=1
+set showtabline=2
+set noshowmode
 
 " *** CoC.NVim settings ***
 " Sample: https://github.com/neoclide/coc.nvim
@@ -66,6 +68,16 @@ set nowritebackup
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+
+let g:lightline#bufferline#show_number  = 2
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
+
+let g:lightline                  = {}
+let g:lightline.colorscheme      = 'PaperColor'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [[]]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -130,27 +142,6 @@ let g:tagbar_compact = 1
 let g:tagbar_expand = 1
 let g:tagbar_singleclick = 1
 
-let g:airline_powerline_fonts = 0 
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-
-let g:airline#extensions#tabline#buffer_idx_format = {
-      \ '0': '0 ',
-      \ '1': '1 ',
-      \ '2': '2 ',
-      \ '3': '3 ',
-      \ '4': '4 ',
-      \ '5': '5 ',
-      \ '6': '6 ',
-      \ '7': '7 ',
-      \ '8': '8 ',
-      \ '9': '9 '
-      \}
-
 let g:startify_custom_header = [
       \ ' __     ___            ',
       \ ' \ \   / (_)_ __ ___   ',
@@ -176,9 +167,6 @@ nnoremap <leader>q :<C-q>q<CR>
 nnoremap <leader>m :MatchmakerToggle<CR>
 nnoremap <leader>s :Startify<CR>
 
-nnoremap <leader><leader>st :call ToggleLocationList()<CR>
-
-nnoremap <C-f> :CtrlSF<CR>
 nnoremap <C-p> :FZF<CR>
 nmap <leader><leader>cs :source $MYVIMRC<CR>
 nmap <leader><leader>cc :e $MYVIMRC<CR>
@@ -188,15 +176,31 @@ nmap <leader><leader>pc :PlugClean<CR>
 nmap <leader><leader>pd :PlugUpdate<CR>
 nmap <leader><leader>pg :PlugUpgrade<CR>
 
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+" Goto N-Buffer
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+
+" Remove N-Buffer
+nmap <Leader>c1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>c2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>c3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>c4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>c5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>c6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
+
+" Add/Remove Buffer
 nmap <leader>+ :enew<CR>
 nmap <leader>- :bp<BAR>:bd! #<CR>
 
