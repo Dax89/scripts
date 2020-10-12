@@ -33,6 +33,7 @@ call plug#begin('~/.vim/plugins')
 
   " Modes
   Plug 'fidian/hexmode'
+  Plug 'jceb/vim-orgmode'
 
   " Theme
   Plug 'NLKNguyen/papercolor-theme'
