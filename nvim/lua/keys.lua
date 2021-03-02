@@ -10,7 +10,9 @@ vim.api.nvim_set_keymap('n', '<Leader>pc', ':PackerCompile<CR>', { noremap = tru
 vim.api.nvim_set_keymap('n', '<Leader>pi', ':PackerInstall<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ps', ':PackerSync<CR>',    { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F7>', ':NvimTreeToggle<CR>',      { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader><Leader>c', ':e '..vim.fn.stdpath("config")..'/init.lua<CR>', { noremap = true })
 
 -- Plugins
 vim.api.nvim_set_keymap('n', '<F8>', ':Vista!!<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-p>', ':FZF<CR>',    { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-p>', ':FZF<CR>',    { noremap = true })
