@@ -35,6 +35,9 @@ call plug#begin('~/.vim/plugins')
   Plug 'fidian/hexmode'
   Plug 'jceb/vim-orgmode'
 
+  " Utils
+  Plug 'tpope/vim-speeddating'
+
   " Theme
   Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
