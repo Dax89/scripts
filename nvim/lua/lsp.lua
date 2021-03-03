@@ -26,7 +26,7 @@ lsp.sumneko_lua.setup{
         path = vim.split(package.path, ';'), -- Setup your lua path
       },
       diagnostics = {
-        globals = {'vim'}, -- Get the language server to recognize the `vim` global
+        globals = {'vim', 'use'}, -- Get the language server to recognize the `vim` global
       },
       workspace = {
         library = { -- Make the server aware of Neovim runtime files

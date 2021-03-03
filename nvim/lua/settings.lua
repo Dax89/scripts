@@ -26,6 +26,10 @@ vim.bo.shiftwidth = indent                       -- Size of an indent
 vim.bo.smartindent = true                        -- Insert indents automatically
 vim.bo.tabstop = indent                          -- Number of spaces tabs count for)
 
+vim.api.nvim_command[[
+  autocmd BufEnter * silent! lcd %:p:h
+]]
+
 -- GUI Specific
 vim.o.guifont = 'Fira Mono:h14'
 

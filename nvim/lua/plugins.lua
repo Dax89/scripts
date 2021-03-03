@@ -24,6 +24,7 @@ require('packer').startup(function()
 
   -- VimL
   use { 'easymotion/vim-easymotion' }
+  use { 'voldikss/vim-floaterm' }
   use { 'mhinz/vim-startify' }
   end)
 
