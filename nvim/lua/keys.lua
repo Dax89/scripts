@@ -12,9 +12,11 @@ vim.api.nvim_set_keymap('n', '<Leader>ps', ':PackerSync<CR>',    { noremap = tru
 vim.api.nvim_set_keymap('n', '<Leader><Leader>c', ':e '..vim.fn.stdpath("config")..'/init.lua<CR>', { noremap = true })
 
 -- Plugins
-vim.api.nvim_set_keymap('n', '<F5>', ':NvimTreeRefresh<CR>',     { noremap = true })
-vim.api.nvim_set_keymap('n', '<F6>', ':FloatermToggle<CR>',     { noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', ':NvimTreeToggle<CR>',      { noremap = true })
-vim.api.nvim_set_keymap('n', '<F8>', ':Vista!!<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':FZF<CR>',    { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':FZF<CR>',    { noremap = true })
+vim.api.nvim_set_keymap('n', '<F5>', ':NvimTreeRefresh<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F6>', ':FloatermToggle<CR>',  { noremap = true })
+vim.api.nvim_set_keymap('n', '<F7>', ':NvimTreeToggle<CR>',  { noremap = true })
+vim.api.nvim_set_keymap('n', '<F8>', ':Vista!!<CR>',         { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-p>', ':FZF<CR>',            { noremap = true })
+
+-- Terminal Commands
+vim.api.nvim_set_keymap('t', '<F6>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true })
