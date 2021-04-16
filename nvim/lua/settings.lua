@@ -21,10 +21,19 @@ vim.o.wildmode = 'list:longest'                  -- Command-line completion mode
 vim.wo.list = true                               -- Show some invisible characters (tabs...)
 vim.wo.number = true                             -- Print line number
 vim.wo.wrap = false                              -- Disable line wrap
-vim.bo.expandtab = true                          -- Use spaces instead of tabs
+-- vim.bo.expandtab = true                          -- Use spaces instead of tabs
 vim.bo.shiftwidth = indent                       -- Size of an indent
-vim.bo.smartindent = true                        -- Insert indents automatically
-vim.bo.tabstop = indent                          -- Number of spaces tabs count for)
+-- vim.bo.smartindent = true                        -- Insert indents automatically
+-- vim.bo.tabstop = indent                          -- Number of spaces tabs count for)
+
+vim.cmd[[
+set autoindent
+set expandtab
+set shiftwidth=2
+set smartindent
+set softtabstop=2
+set tabstop=2
+]]
 
 vim.api.nvim_command[[
   autocmd BufEnter * silent! lcd %:p:h

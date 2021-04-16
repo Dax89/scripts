@@ -61,3 +61,4 @@ fi
 zplug load
 
 ZSH_THEME="dracula"
+alias vim="nvim"

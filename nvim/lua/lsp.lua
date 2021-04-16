@@ -4,6 +4,7 @@
 -- Lua: https://github.com/sumneko/lua-language-server
 
 local completion = require('completion')
+local lsputil = require('lspconfig/util')
 local lsp = require('lspconfig')
 
 vim.g.completion_matching_strategy_list = { 'exact', 'fuzzy' }
@@ -12,9 +13,12 @@ vim.g.completion_matching_smart_case = true
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 
-lsp.tsserver.setup{ on_attach = completion.on_attach }
 lsp.clangd.setup{ on_attach = completion.on_attach }
 lsp.pyls.setup{ on_attach = completion.on_attach }
+
+lsp.tsserver.setup{
+  on_attach = completion.on_attach
+}
 
 lsp.sumneko_lua.setup{
   cmd = { "/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua" },

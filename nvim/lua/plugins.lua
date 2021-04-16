@@ -23,9 +23,15 @@ require('packer').startup(function()
   use { 'norcalli/nvim-colorizer.lua' }
 
   -- VimL
+  use { 'leafOfTree/vim-svelte-plugin' }
   use { 'easymotion/vim-easymotion' }
   use { 'voldikss/vim-floaterm' }
   use { 'mhinz/vim-startify' }
+  use { 'ziglang/zig.vim' }
+  use { 'pangloss/vim-javascript' }
+  use { 'evanleck/vim-svelte.git' }
+  use { 'axvr/org.vim' }
+  use { 'instant-markdown/vim-instant-markdown' }
   end)
 
 require('colorizer').setup()

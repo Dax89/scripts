@@ -68,6 +68,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
+  ["org.vim"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/org.vim"
+  },
   ["packer.nvim"] = {
     loaded = false,
     needs_bufread = false,
@@ -77,17 +81,33 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-easymotion"
   },
-  ["vim-floatterm"] = {
+  ["vim-floaterm"] = {
     loaded = true,
-    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-floatterm"
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+  },
+  ["vim-javascript"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-javascript"
   },
   ["vim-startify"] = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-startify"
   },
+  ["vim-svelte-plugin"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-svelte-plugin"
+  },
+  ["vim-svelte.git"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-svelte.git"
+  },
   ["vista.vim"] = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/vista.vim"
+  },
+  ["zig.vim"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/zig.vim"
   }
 }
 

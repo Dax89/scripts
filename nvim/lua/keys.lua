@@ -4,6 +4,11 @@ vim.api.nvim_set_keymap('n', '<Down>', '<Nop>',  { noremap = true })
 vim.api.nvim_set_keymap('n', '<Left>', '<Nop>',  { noremap = true })
 vim.api.nvim_set_keymap('n', '<Right>', '<Nop>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Space>', '<Nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F9>', 'zA', { noremap = true })
+vim.api.nvim_set_keymap('i', '<F9>', 'zA', { noremap = true })
+vim.api.nvim_set_keymap('o', '<F9>', 'zA', { noremap = true })
+vim.api.nvim_set_keymap('v', '<F9>', 'zA', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>a', 'gg0VG', { noremap = true })
 
 -- Shortcuts
 vim.api.nvim_set_keymap('n', '<Leader>pc', ':PackerCompile<CR>', { noremap = true, silent = true })
