@@ -2,7 +2,6 @@ local indent = 2
 vim.cmd("colorscheme edge")
 
 vim.g.mapleader = " "                            -- Leader is " "
-vim.g.noswapfile = true                          -- Disable .swp files
 vim.o.clipboard = "unnamedplus"                  -- Use System Clipboard
 vim.o.mouse = "a"                                -- Mouse interacts with NeoVim
 vim.o.cursorline = true                          -- Highlight current line
@@ -21,22 +20,24 @@ vim.o.wildmode = "list:longest"                  -- Command-line completion mode
 vim.wo.list = true                               -- Show some invisible characters (tabs...)
 vim.wo.number = true                             -- Print line number
 vim.wo.wrap = false                              -- Disable line wrap
--- vim.bo.expandtab = true                          -- Use spaces instead of tabs
 vim.bo.shiftwidth = indent                       -- Size of an indent
+-- vim.g.noswapfile = true                          -- Disable .swp files
+-- vim.bo.expandtab = true                          -- Use spaces instead of tabs
 -- vim.bo.smartindent = true                        -- Insert indents automatically
 -- vim.bo.tabstop = indent                          -- Number of spaces tabs count for)
 
 vim.cmd[[
+set noswapfile
 set autoindent
 set expandtab
-set shiftwidth=2
+set shiftwidth=4
 set smartindent
-set softtabstop=2
-set tabstop=2
+set softtabstop=4
+set tabstop=4
 ]]
 
 vim.api.nvim_command[[
-  autocmd BufEnter * silent! lcd %:p:h
+autocmd BufEnter * silent! lcd %:p:h
 ]]
 
 -- GUI Specific
@@ -44,17 +45,17 @@ vim.o.guifont = "Fira Mono:h14"
 
 -- Plugin Specific
 vim.g.startify_custom_header = {
-[[   _   _         __     _____ __  __   ]],
-[[  | \ | | ___  __\ \   / /_ _|  \/  |  ]],
-[[  |  \| |/ _ \/ _ \ \ / / | || |\/| |  ]],
-[[  | |\  |  __/ (_) \ V /  | || |  | |  ]],
-[[  |_| \_|\___|\___/ \_/  |___|_|  |_|  ]],
+    [[   _   _         __     _____ __  __   ]],
+    [[  | \ | | ___  __\ \   / /_ _|  \/  |  ]],
+    [[  |  \| |/ _ \/ _ \ \ / / | || |\/| |  ]],
+    [[  | |\  |  __/ (_) \ V /  | || |  | |  ]],
+    [[  |_| \_|\___|\___/ \_/  |___|_|  |_|  ]],
 }
 
 vim.g.startify_lists = {
-  { type = "dir", header = { "   Current directory " .. vim.fn.getcwd() } },
-  { type = "files", header = { "   Recent files" } },
-  { type = "sessions", header = { "   Sessions" } },
-  { type = "bookmarks", header = { "   Bookmarks" } },
-  { type = "commands", header = { "   Commands" } },
+    { type = "dir", header = { "   Current directory " .. vim.fn.getcwd() } },
+    { type = "files", header = { "   Recent files" } },
+    { type = "sessions", header = { "   Sessions" } },
+    { type = "bookmarks", header = { "   Bookmarks" } },
+    { type = "commands", header = { "   Commands" } },
 }
