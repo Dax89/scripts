@@ -56,6 +56,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-lspinstall"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
@@ -84,6 +88,10 @@ _G.packer_plugins = {
   ["vim-floaterm"] = {
     loaded = true,
     path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+  },
+  ["vim-instant-markdown"] = {
+    loaded = true,
+    path = "/home/davide/.local/share/nvim/site/pack/packer/start/vim-instant-markdown"
   },
   ["vim-javascript"] = {
     loaded = true,

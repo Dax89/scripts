@@ -1,3 +1,4 @@
+require("dev")
 require("settings")
 require("plugins")
 require("keys")

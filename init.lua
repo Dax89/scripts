@@ -1,6 +1,0 @@
-require("settings")
-require("plugins")
-require("keys")
-require("bufferline")
-require("statusline")
-require("lsp")

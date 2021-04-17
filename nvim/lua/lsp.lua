@@ -1,44 +1,67 @@
--- Javascript/TypeScript: https://github.com/theia-ide/typescript-language-server
--- C/C++: https://clangd.llvm.org/installation.html (CLang >= 9 required)
--- Python: https://github.com/palantir/python-language-server
--- Lua: https://github.com/sumneko/lua-language-server
+local completion = require("completion")
 
-local completion = require('completion')
-local lsputil = require('lspconfig/util')
-local lsp = require('lspconfig')
-
-vim.g.completion_matching_strategy_list = { 'exact', 'fuzzy' }
+vim.g.completion_matching_strategy_list = { "exact", "fuzzy" }
 vim.g.completion_matching_smart_case = true
 
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
-vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "pumvisible() ? '\\<C-p>' : '\\<Tab>'", {expr = true})
+vim.api.nvim_set_keymap("i", "<Tab>", "pumvisible() ? '\\<C-n>' : '\\<Tab>'", {expr = true})
 
-lsp.clangd.setup{ on_attach = completion.on_attach }
-lsp.pyls.setup{ on_attach = completion.on_attach }
-
-lsp.tsserver.setup{
-  on_attach = completion.on_attach
-}
-
-lsp.sumneko_lua.setup{
-  cmd = { "/bin/lua-language-server", "-E", "/usr/share/lua-language-server/main.lua" },
-  on_attach=completion.on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT', -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        path = vim.split(package.path, ';'), -- Setup your lua path
-      },
-      diagnostics = {
-        globals = {'vim', 'use'}, -- Get the language server to recognize the `vim` global
-      },
-      workspace = {
-        library = { -- Make the server aware of Neovim runtime files
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
+-- Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
+-- Configure lua language server for neovim development
+local lua_settings = {
+  Lua = {
+    runtime = {
+      -- LuaJIT in the case of Neovim
+      version = "LuaJIT",
+      path = vim.split(package.path, ";"),
+    },
+    diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      globals = {"vim"},
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
       },
     },
   }
 }
 
+-- config that activates keymaps and enables snippet support
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    capabilities = capabilities, -- enable snippet support
+    on_attach = completion.on_attach -- map buffer local keybindings when the language server attaches
+  }
+end
+
+-- lsp-install
+local function setup_servers()
+  require("lspinstall").setup()
+
+  -- get all installed servers
+  local servers = require("lspinstall").installed_servers()
+
+  for _, server in pairs(servers) do
+    local config = make_config()
+
+    -- language specific config
+    if server == "lua" then
+      config.settings = lua_settings
+    end
+
+    require("lspconfig")[server].setup(config)
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don"t have to restart neovim
+require("lspinstall").post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
