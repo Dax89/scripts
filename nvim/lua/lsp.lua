@@ -2,7 +2,25 @@ vim.g.completion_matching_strategy_list = { "exact", "fuzzy" }
 vim.g.completion_matching_smart_case = true
 vim.api.nvim_set_keymap("i", "<C-Space>", "<Plug>(completion_trigger)", {noremap = false, silent = true})
 
+local function load_lspconfig(name, command, installcommands)
+    local config = require("lspconfig")[name].document_config
+    require("lspconfig/configs")[name] = nil
+    config.default_config.cmd[1] = command
+
+    require("lspinstall/servers")[name] = vim.tbl_extend("error", config, {
+        install_script = installcommands,
+        uninstall_script = nil
+    })
+end
+
 -- Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
+-- Custom Language Servers
+load_lspconfig("zls", "./zls/zls", [[
+    mkdir -p zls
+    cd zls
+    curl -L https://github.com/zigtools/zls/releases/download/0.1.0/x86_64-linux.tar.xz | tar -xJ --strip-components=1 -C .
+]])
+
 -- Configure lua language server for neovim development
 local lua_settings = {
     Lua = {
