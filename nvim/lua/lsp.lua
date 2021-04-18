@@ -14,12 +14,6 @@ local function load_lspconfig(name, command, installcommands)
 end
 
 -- Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
--- Custom Language Servers
-load_lspconfig("zls", "./zls/zls", [[
-    mkdir -p zls
-    cd zls
-    curl -L https://github.com/zigtools/zls/releases/download/0.1.0/x86_64-linux.tar.xz | tar -xJ --strip-components=1 -C .
-]])
 
 -- Configure lua language server for neovim development
 local lua_settings = {

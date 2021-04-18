@@ -27,7 +27,6 @@ require("packer").startup(function()
     use { "easymotion/vim-easymotion" }
     use { "voldikss/vim-floaterm" }
     use { "mhinz/vim-startify" }
-    use { "ziglang/zig.vim" }
     use { "pangloss/vim-javascript" }
     use { "evanleck/vim-svelte.git" }
     use { "axvr/org.vim" }
