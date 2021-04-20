@@ -1,4 +1,3 @@
-local indent = 2
 vim.cmd("colorscheme edge")
 
 vim.g.mapleader = " "                            -- Leader is " "
@@ -20,11 +19,6 @@ vim.o.wildmode = "list:longest"                  -- Command-line completion mode
 vim.wo.list = true                               -- Show some invisible characters (tabs...)
 vim.wo.number = true                             -- Print line number
 vim.wo.wrap = false                              -- Disable line wrap
-vim.bo.shiftwidth = indent                       -- Size of an indent
--- vim.g.noswapfile = true                          -- Disable .swp files
--- vim.bo.expandtab = true                          -- Use spaces instead of tabs
--- vim.bo.smartindent = true                        -- Insert indents automatically
--- vim.bo.tabstop = indent                          -- Number of spaces tabs count for)
 
 vim.cmd[[
 set noswapfile
