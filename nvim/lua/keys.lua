@@ -9,19 +9,22 @@ vim.api.nvim_set_keymap("i", "<F9>", "zA", { noremap = true })
 vim.api.nvim_set_keymap("o", "<F9>", "zA", { noremap = true })
 vim.api.nvim_set_keymap("v", "<F9>", "zA", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>a", "gg0VG", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-Tab>", ":bn<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-S-Tab>", ":bp<CR>", { noremap = true })
 
 -- Shortcuts
 vim.api.nvim_set_keymap("n", "<Leader>pc", ":PackerCompile<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>pi", ":PackerInstall<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>ps", ":PackerSync<CR>",    { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>ps", ":PackerSync<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader><Leader>c", ":e "..vim.fn.stdpath("config").."/init.lua<CR>", { noremap = true })
 
 -- Plugins
 vim.api.nvim_set_keymap("n", "<F5>", ":NvimTreeRefresh<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<F6>", ":FloatermToggle<CR>",  { noremap = true })
-vim.api.nvim_set_keymap("n", "<F7>", ":NvimTreeToggle<CR>",  { noremap = true })
-vim.api.nvim_set_keymap("n", "<F8>", ":Vista!!<CR>",         { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<F6>", ":FloatermToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<F7>", ":NvimTreeToggle<CR>",{ noremap = true })
+vim.api.nvim_set_keymap("n", "<F8>", ":Vista!!<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<F10>", ":LspTroubleToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files<CR>",  { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-A-p>", ":Telescope live_grep<CR>", { noremap = true })
 
 -- Terminal Commands

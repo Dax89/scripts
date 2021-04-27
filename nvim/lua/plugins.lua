@@ -12,6 +12,7 @@ require("packer").startup(function()
     use { "wbthomason/packer.nvim", opt = true } -- Packer can manage itself as an optional plugin
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     use { "nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}} }
+    use { "folke/lsp-trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
     use "sainnhe/edge"
     use "kyazdani42/nvim-web-devicons"
     use "kyazdani42/nvim-tree.lua"
@@ -35,3 +36,4 @@ require("packer").startup(function()
 end)
 
 require("colorizer").setup()
+require("trouble").setup()

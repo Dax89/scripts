@@ -32,6 +32,7 @@ set tabstop=4
 
 vim.api.nvim_command[[
 autocmd BufEnter * silent! lcd %:p:h
+au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=180, on_visual=true}
 ]]
 
 -- GUI Specific
@@ -39,17 +40,10 @@ vim.o.guifont = "Fira Mono:h14"
 
 -- Plugin Specific
 vim.g.startify_custom_header = {
-    [[   _   _         __     _____ __  __   ]],
-    [[  | \ | | ___  __\ \   / /_ _|  \/  |  ]],
-    [[  |  \| |/ _ \/ _ \ \ / / | || |\/| |  ]],
-    [[  | |\  |  __/ (_) \ V /  | || |  | |  ]],
-    [[  |_| \_|\___|\___/ \_/  |___|_|  |_|  ]],
-}
-
-vim.g.startify_lists = {
-    { type = "dir", header = { "   Current directory " .. vim.fn.getcwd() } },
-    { type = "files", header = { "   Recent files" } },
-    { type = "sessions", header = { "   Sessions" } },
-    { type = "bookmarks", header = { "   Bookmarks" } },
-    { type = "commands", header = { "   Commands" } },
+    [[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗  ]],
+    [[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║  ]],
+    [[  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║  ]],
+    [[  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║  ]],
+    [[  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║  ]],
+    [[  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝  ]],
 }
