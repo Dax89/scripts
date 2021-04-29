@@ -13,7 +13,7 @@ local function load_lspconfig(name, command, installcommands)
     })
 end
 
--- Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
+---- Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
 
 -- Configure lua language server for neovim development
 local lua_settings = {
@@ -53,6 +53,9 @@ local function setup_servers()
 
     -- get all installed servers
     local servers = require("lspinstall").installed_servers()
+
+    -- add manually installed servers
+    table.insert(servers, "nimls") -- NIM Language Support
 
     for _, server in pairs(servers) do
         local config = make_config()
