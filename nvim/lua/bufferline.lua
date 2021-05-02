@@ -23,6 +23,6 @@ vim.api.nvim_set_keymap("n", "<Leader>6", ":BufferGoto 6<CR>", { noremap = true,
 vim.api.nvim_set_keymap("n", "<Leader>7", ":BufferGoto 7<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>8", ":BufferGoto 8<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>9", ":BufferLast<CR>",   { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>-", ":BufferClose<CR>",  { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>-", ":BufferClose!<CR>",  { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>+", ":enew<CR>",         { noremap = true, silent = true })
 

@@ -55,7 +55,7 @@ local function setup_servers()
     local servers = require("lspinstall").installed_servers()
 
     -- add manually installed servers
-    table.insert(servers, "nimls") -- NIM Language Support
+    table.insert(servers, "zls")   -- ZIG Language Support
 
     for _, server in pairs(servers) do
         local config = make_config()

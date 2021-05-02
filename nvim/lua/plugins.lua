@@ -34,6 +34,7 @@ require("packer").startup(function()
     use "instant-markdown/vim-instant-markdown"
     use "Raimondi/delimitMate"
     use "alaviss/nim.nvim"
+    use "ziglang/zig.vim"
 end)
 
 require("colorizer").setup()
