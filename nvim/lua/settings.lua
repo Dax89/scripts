@@ -21,6 +21,7 @@ vim.wo.number = true                             -- Print line number
 vim.wo.wrap = false                              -- Disable line wrap
 
 vim.cmd[[
+set nofoldenable
 set noswapfile
 set autoindent
 set expandtab
