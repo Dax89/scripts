@@ -1,6 +1,6 @@
 vim.g.completion_matching_strategy_list = { "exact", "fuzzy" }
 vim.g.completion_matching_smart_case = true
-vim.api.nvim_set_keymap("i", "<C-Space>", "<Plug>(completion_trigger)", {noremap = false, silent = true})
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {noremap = false, silent = true, expr = true})
 
 local function load_lspconfig(name, command, installcommands)
     local config = require("lspconfig")[name].document_config
@@ -43,7 +43,6 @@ local function make_config()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return {
         capabilities = capabilities,                -- enable snippet support
-        on_attach = require("completion").on_attach -- map buffer local keybindings when the language server attaches
     }
 end
 
@@ -69,6 +68,32 @@ local function setup_servers()
         require("lspconfig")[server].setup(config)
     end
 end
+
+require("compe").setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = false;
+    ultisnips = true;
+    conjure = true;
+  };
+}
 
 setup_servers()
 

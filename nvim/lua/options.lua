@@ -33,6 +33,7 @@ set tabstop=4
 
 vim.api.nvim_command[[
 autocmd BufEnter * silent! lcd %:p:h
+autocmd BufNewFile,BufRead,BufEnter *.postcss set syntax=scss
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=180, on_visual=true}
 ]]
 
@@ -40,6 +41,8 @@ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeou
 vim.o.guifont = "Fira Mono:h14"
 
 -- Plugin Specific
+vim.g['aniseed#env'] = true
+
 vim.g.startify_custom_header = {
     [[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗  ]],
     [[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║  ]],

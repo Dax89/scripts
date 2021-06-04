@@ -29,3 +29,4 @@ vim.api.nvim_set_keymap("n", "<C-A-p>", ":Telescope live_grep<CR>", { noremap = 
 
 -- Terminal Commands
 vim.api.nvim_set_keymap("t", "<F6>", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true })
+
