@@ -5,8 +5,9 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-export EDITOR=vim
+export EDITOR=nvim
 export ZPLUG_HOME=$HOME/.zplug
+export NVR_CMD=nvim-qt
 source $ZPLUG_HOME/init.zsh
 
 # -------- *** KEYBINDS *** -------- #
