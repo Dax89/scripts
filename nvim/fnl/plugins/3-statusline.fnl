@@ -22,20 +22,20 @@
 
 (tset gls.left 1 {
   :FirstElement {
-    :provider (lambda [] "▋")
+    :provider (fn [] "▋")
     :highlight [colors.blue colors.yellow]
   }
 })
 
 (tset gls.left 2 {
   :ViMode {
-      :provider (lambda []
+      :provider (fn []
           (local alias {:n "NORMAL" :i "INSERT" :c "COMMAND" :V "VISUAL" "" "VISUAL"})
           (. alias (vim.fn.mode)))
       :separator ""
       :separator_highlight {
           colors.yellow
-          (lambda [] (if (buffer-not-empty) colors.purple colors.darkblue))
+          (fn [] (if (buffer-not-empty) colors.purple colors.darkblue))
       }
       :highlight [colors.magenta colors.yellow "bold"]
     }
@@ -63,7 +63,7 @@
 
 (tset gls.left 5 {
   :GitIcon {
-    :provider (lambda [] ("  "))
+    :provider (fn [] ("  "))
     :condition buffer-not-empty
     :highlight [colors.orange colors.purple]
   }
@@ -110,7 +110,7 @@
 
 (tset gls.left 10 {
   :LeftEnd {
-    :provider (lambda [] "")
+    :provider (fn [] "")
     :separator ""
     :separator_highlight [colors.purple colors.bg]
     :highlight [colors.purple colors.purple]
@@ -127,7 +127,7 @@
 
 (tset gls.left 12 {
   :Space {
-    :provider (lambda [] " ")
+    :provider (fn [] " ")
   }
 })
 

@@ -91,13 +91,13 @@
     (when (= server "lua")
       (tset config :settings luasettings))
     
-    (let [lspconfig (require :lspconfig)]
+    (let [lspconfig (require "lspconfig")]
       ((. (. lspconfig server) :setup) config))))
 
 (setup-servers)
 
 ; Automatically reload after `:LspInstall <server>` so we don"t have to restart neovim
 (let [lspinstall (require :lspinstall)]
-  (tset lspinstall :post_install_hook (lambda []
+  (tset lspinstall :post_install_hook (fn []
                                         (setup-servers)
                                         (vim.cmd "bufdo e"))))
