@@ -1,4 +1,4 @@
-(import-macros {: use-pkg} "macros")
+(import-macros {: nv-fn : use-pkg} "macros")
 
 (local packerpath (.. (vim.fn.stdpath "data") "/site/pack/packer/start/packer.nvim"))
 
@@ -9,7 +9,7 @@
 
 (when (= (packer-installed?) false)
   (print "Could not find packer.nvim, cloning new copy to" packerpath)
-  (vim.fn.system ["git" "clone" "https://github.com/wbthomason/packer.nvim" packerpath])
+  (nv-fn system ["git" "clone" "https://github.com/wbthomason/packer.nvim" packerpath])
   (vim.api.nvim_command "packadd packer.nvim"))
 
 (local packer (require "packer"))
@@ -18,6 +18,7 @@
   ; Lua
   (use-pkg "wbthomason/packer.nvim") ; Packer can manage itself as an optional plugin
   (use-pkg "rktjmp/hotpot.nvim")     ; Fennel Support
+  (use-pkg "MunifTanjim/nui.nvim")   ; UI Component Library
   (use-pkg "lukas-reineke/indent-blankline.nvim")
   (use-pkg "kyazdani42/nvim-web-devicons")
   (use-pkg "onsails/lspkind-nvim")
@@ -31,6 +32,7 @@
   (use-pkg "norcalli/nvim-colorizer.lua")
   (use-pkg "mhartington/oceanic-next")
   (use-pkg "folke/lsp-trouble.nvim")
+  (use-pkg "yamatsum/nvim-cursorline")
 
   ; NOTE: How can I wrap these with use-pkg?
   ;(use {1 "vhyrro/neorg" :requires [[:nvim-lua/plenary.nvim]]})

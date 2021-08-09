@@ -1,17 +1,22 @@
-(tset vim.g :completion_matching_strategy_list ["exact" "fuzzy"])
-(tset vim.g :completion_matching_smart_case true)
+(import-macros {: nv-opt : nv-fn : with-require : with-require-as} "macros")
+
+(nv-opt g
+  :completion_matching_strategy_list ["exact" "fuzzy"]
+  :completion_matching_smart_case true
+  nil)
+
 (vim.api.nvim_set_keymap "i" "<C-Space>" "compe#complete()" {:noremap false :silent true :expr true})
 
 (fn load-lspconfig [name command installcommands]
   (local lspconfig (require :lspconfig))
   (local config (. (. lspconfig name) :document_config))
 
-  (let [lspcfg (require "lspconfig/configs")]
+  (with-require-as lspcfg lspconfig/configs
     (tset lspcfg name nil))
 
   (tset config.default_config.cmd 1 command)
 
-  (let [lspservers (require "lspinstall/servers")]
+  (with-require-as lspservers lspinstall/servers
     (tset lspservers name (vim.tbl_extend "error" config { :install_script installcommands :uninstall_script nil }))))
 
 
@@ -32,8 +37,8 @@
     :workspace {
       ; Make the server aware of Neovim runtime files
       :library {
-        (vim.fn.expand "$VIMRUNTIME/lua") true
-        (vim.fn.expand "$VIMRUNTIME/lua/vim/lsp") true
+        (nv-fn expand "$VIMRUNTIME/lua") true
+        (nv-fn expand "$VIMRUNTIME/lua/vim/lsp") true
       }
     }
   }
@@ -47,7 +52,7 @@
 
 
 ; Compe
-(let [compe (require :compe)]
+(with-require compe
   (compe.setup {
     :enabled true
     :autocomplete true
@@ -91,13 +96,13 @@
     (when (= server "lua")
       (tset config :settings luasettings))
     
-    (let [lspconfig (require "lspconfig")]
+    (with-require lspconfig
       ((. (. lspconfig server) :setup) config))))
 
 (setup-servers)
 
 ; Automatically reload after `:LspInstall <server>` so we don"t have to restart neovim
-(let [lspinstall (require :lspinstall)]
+(with-require lspinstall
   (tset lspinstall :post_install_hook (fn []
                                         (setup-servers)
                                         (vim.cmd "bufdo e"))))
