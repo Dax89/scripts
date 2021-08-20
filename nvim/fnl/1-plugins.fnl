@@ -32,7 +32,10 @@
   (use-pkg "norcalli/nvim-colorizer.lua")
   (use-pkg "mhartington/oceanic-next")
   (use-pkg "folke/lsp-trouble.nvim")
+  (use-pkg "windwp/nvim-autopairs")
+
   (use-pkg "yamatsum/nvim-cursorline")
+  (use-pkg "ahmedkhalf/project.nvim")
 
   ; NOTE: How can I wrap these with use-pkg?
   ;(use {1 "vhyrro/neorg" :requires [[:nvim-lua/plenary.nvim]]})
@@ -46,7 +49,6 @@
   (use-pkg "pangloss/vim-javascript")
   (use-pkg "evanleck/vim-svelte")
   (use-pkg "instant-markdown/vim-instant-markdown")
-  (use-pkg "Raimondi/delimitMate")
   (use-pkg "MTDL9/vim-log-highlighting")
   (use-pkg "bakpakin/fennel.vim")
   (use-pkg "alaviss/nim.nvim")
@@ -54,6 +56,7 @@
 
   ; Lisp
   (use-pkg "vlime/vlime")
+  ;(use-pkg "Olical/conjure" :tag "v4.22.1")
   ;(use-pkg "kovisoft/paredit")
   nil))
 

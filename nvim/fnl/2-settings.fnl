@@ -1,26 +1,5 @@
 (import-macros {: nv-opt : nv-cmd} "macros")
 
-(nv-cmd
-  ; Color Scheme
-  "colorscheme OceanicNext"
-
-  ; General Settings
-  "set nofoldenable"
-  "set noswapfile"
-  "set autoindent"
-  "set expandtab"
-  "set shiftwidth=4"
-  "set smartindent"
-  "set softtabstop=4"
-  "set tabstop=4"
-
-  ; Auto Commands
-  "autocmd BufEnter * silent! lcd %:p:h"
-  "autocmd BufNewFile,BufRead,BufEnter *.postcss set syntax=scss"
-  "au TextYankPost * silent! lua vim.highlight.on_yank()"
-  nil)
-
-
 (nv-opt g
   ; Theme Settings
   :oceanic_next_terminal_italic 1
@@ -62,4 +41,25 @@
 (nv-opt o
   ; GUI Specific
   :guifont "Fira Mono:h14"
+  nil)
+
+(nv-cmd
+  ; Color Scheme
+  "colorscheme OceanicNext"
+  "syntax on"
+
+  ; General Settings
+  "set nofoldenable"
+  "set noswapfile"
+  "set autoindent"
+  "set expandtab"
+  "set shiftwidth=4"
+  "set smartindent"
+  "set softtabstop=4"
+  "set tabstop=4"
+
+  ; Auto Commands
+  "autocmd BufEnter * silent! lcd %:p:h"
+  "autocmd BufNewFile,BufRead,BufEnter *.postcss set syntax=scss"
+  "au TextYankPost * silent! lua vim.highlight.on_yank()"
   nil)

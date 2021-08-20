@@ -26,9 +26,15 @@
   `(let [,altname (require ,(tostring name))]
     (do ,...)))
 
+(fn plugin-setup [name func]
+  `(let [p# (require ,(tostring name))]
+    (. p# ,func)))
+
+
 { : use-pkg
   : nv-cmd
   : nv-fn
   : nv-opt
   : with-require
-  : with-require-as }
+  : with-require-as
+  : plugin-setup }

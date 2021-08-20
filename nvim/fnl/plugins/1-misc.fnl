@@ -1,6 +1,4 @@
-(macro plugin-setup [name func]
-  `(let [p# (require ,(tostring name))]
-    (. p# ,func)))
+(import-macros {: nv-opt : plugin-setup} "macros")
 
 (plugin-setup colorizer setup)
 (plugin-setup trouble setup)
