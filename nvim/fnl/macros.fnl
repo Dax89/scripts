@@ -26,9 +26,9 @@
   `(let [,altname (require ,(tostring name))]
     (do ,...)))
 
-(fn plugin-setup [name func]
+(fn plugin-setup [name func ...]
   `(let [p# (require ,(tostring name))]
-    (. p# ,func)))
+    ((. p# ,(tostring func)) ,...)))
 
 
 { : use-pkg
