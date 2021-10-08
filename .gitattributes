@@ -1,1 +1,1 @@
-nvim/fnl/*.fnl linguist-vendored
+nvim/fnl/**/*.fnl linguist-vendored
