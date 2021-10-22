@@ -57,7 +57,7 @@
   ; Lisp
   (use-pkg "vlime/vlime")
   ;(use-pkg "Olical/conjure" :tag "v4.22.1")
-  ;(use-pkg "kovisoft/paredit")
+  (use-pkg "kovisoft/paredit")
   nil))
 
 (when (= wasinstalled? false)
