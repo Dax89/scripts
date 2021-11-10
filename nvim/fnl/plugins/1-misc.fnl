@@ -3,7 +3,6 @@
 (plugin-setup colorizer setup)
 (plugin-setup trouble setup)
 (plugin-setup lspkind init)
-(plugin-setup lspkind init)
 
 (plugin-setup nvim-tree setup
               {:update_focused_file {:enable true}

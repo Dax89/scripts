@@ -1,55 +1,11 @@
 (import-macros {: nv-opt : nv-fn : with-require : with-require-as} "macros")
 
 (nv-opt g
-  :completion_matching_strategy_list ["exact" "fuzzy"]
-  :completion_matching_smart_case true
-  nil)
+        :completion_matching_strategy_list ["exact" "fuzzy"]
+        :completion_matching_smart_case true
+        nil)
 
-(vim.api.nvim_set_keymap "i" "<C-Space>" "compe#complete()" {:noremap false :silent true :expr true})
-
-(fn load-lspconfig [name command installcommands]
-  (local lspconfig (require :lspconfig))
-  (local config (. (. lspconfig name) :document_config))
-
-  (with-require-as lspcfg lspconfig/configs
-    (tset lspcfg name nil))
-
-  (tset config.default_config.cmd 1 command)
-
-  (with-require-as lspservers lspinstall/servers
-    (tset lspservers name (vim.tbl_extend "error" config { :install_script installcommands :uninstall_script nil }))))
-
-
-; Based On: https://github.com/kabouzeid/nvim-lspinstall/wiki
-
-; Configure lua language server for neovim development
-(local luasettings {
-  :Lua {
-    :runtime {
-      ; LuaJIT in the case of Neovim
-      :version "LuaJIT"
-      :path (vim.split package.path  ";")
-    }
-    :diagnostics {
-      ; Get the language server to recognize the `vim` global
-      :globals ["vim"]
-    }
-    :workspace {
-      ; Make the server aware of Neovim runtime files
-      :library {
-        (nv-fn expand "$VIMRUNTIME/lua") true
-        (nv-fn expand "$VIMRUNTIME/lua/vim/lsp") true
-      }
-    }
-  }
-})
-
-; config that activates keymaps and enables snippet support
-(fn make-config [ ]
-    (local capabilities (vim.lsp.protocol.make_client_capabilities))
-    (tset capabilities :textDocument.completion.completionItem.snippetSupport true)
-    {:capabilities capabilities}) ; enable snippet support
-
+(vim.api.nvim_set_keymap "i" "<Tab>" "compe#complete()" {:noremap false :silent true :expr true})
 
 ; Compe
 (with-require compe
@@ -79,30 +35,28 @@
     }
 }))
 
-; LSPInstall
+; Custom LSP Callbacks
+(fn setup-lsp-sumneko_lua [server]
+  {
+   :settings {
+      :Lua {
+        :diagnostics {
+          :globals ["vim"] ; Get the language server to recognize the `vim` global
+        }
+      }
+    }
+  })
+
+; LSPInstaller
 (fn setup-servers []
-  (local lspinstall (require :lspinstall))
-  (lspinstall:setup)
-  (local servers (lspinstall:installed_servers))
+  (local lspinstall (require :nvim-lsp-installer))
+  (lspinstall.on_server_ready (fn [server]
+                                (var opts { })
 
-  ; Add manually installed servers
-  (table.insert servers "nimls")
-  (table.insert servers "zls")
+                                (match server.name
+                                  "sumneko_lua" (set opts (setup-lsp-sumneko_lua)))
 
-  (each [_ server (pairs servers)]
-    (local config (make-config))
-
-    ; Language specific config
-    (when (= server "lua")
-      (tset config :settings luasettings))
-    
-    (with-require lspconfig
-      ((. (. lspconfig server) :setup) config))))
+                                (server:setup opts))))
 
 (setup-servers)
 
-; Automatically reload after `:LspInstall <server>` so we don"t have to restart neovim
-(with-require lspinstall
-  (tset lspinstall :post_install_hook (fn []
-                                        (setup-servers)
-                                        (vim.cmd "bufdo e"))))

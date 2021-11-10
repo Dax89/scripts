@@ -27,7 +27,7 @@
   (use-pkg "glepnir/galaxyline.nvim")
   (use-pkg "liuchengxu/vista.vim")
   (use-pkg "neovim/nvim-lspconfig")
-  (use-pkg "kabouzeid/nvim-lspinstall")
+  (use-pkg "williamboman/nvim-lsp-installer")
   (use-pkg "hrsh7th/nvim-compe")
   (use-pkg "norcalli/nvim-colorizer.lua")
   (use-pkg "mhartington/oceanic-next")
