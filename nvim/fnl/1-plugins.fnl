@@ -1,4 +1,4 @@
-(import-macros {: nv-fn : use-pkg} "macros")
+(import-macros {: nv-fn : use-pkg : plugin-setup} "macros")
 
 (local packerpath (.. (vim.fn.stdpath "data") "/site/pack/packer/start/packer.nvim"))
 
@@ -33,14 +33,11 @@
   (use-pkg "mhartington/oceanic-next")
   (use-pkg "folke/lsp-trouble.nvim")
   (use-pkg "windwp/nvim-autopairs")
-
   (use-pkg "yamatsum/nvim-cursorline")
   (use-pkg "ahmedkhalf/project.nvim")
-
-  ; NOTE: How can I wrap these with use-pkg?
-  ;(use {1 "vhyrro/neorg" :requires [[:nvim-lua/plenary.nvim]]})
-  (use {1 "nvim-treesitter/nvim-treesitter" :run ":TSUpdate"})
-  (use {1 "nvim-telescope/telescope.nvim" :requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]})
+  (use-pkg "kristijanhusak/orgmode.nvim")
+  (use-pkg "nvim-treesitter/nvim-treesitter" {:run ":TSUpdate"})
+  (use-pkg "nvim-telescope/telescope.nvim"   {:requires [[:nvim-lua/popup.nvim] [:nvim-lua/plenary.nvim]]})
 
   ; VimL
   (use-pkg "easymotion/vim-easymotion")
@@ -56,7 +53,6 @@
 
   ; Lisp
   (use-pkg "vlime/vlime")
-  ;(use-pkg "Olical/conjure" :tag "v4.22.1")
   (use-pkg "kovisoft/paredit")
   nil))
 

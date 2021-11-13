@@ -1,11 +1,11 @@
-(import-macros {: nv-opt : nv-fn : with-require : with-require-as} "macros")
+(import-macros {: nv-opt : nv-keys : nv-fn : with-require : with-require-as} "macros")
 
 (nv-opt g
         :completion_matching_strategy_list ["exact" "fuzzy"]
         :completion_matching_smart_case true
         nil)
 
-(vim.api.nvim_set_keymap "i" "<Tab>" "compe#complete()" {:noremap false :silent true :expr true})
+(nv-keys ("i" "<Tab>" "compe#complete()" {:noremap false :silent true :expr true}))
 
 ; Compe
 (with-require compe
@@ -27,6 +27,7 @@
       :path true
       ;:buffer true
       :calc true
+      :orgmode true
       :nvim_lsp true
       :nvim_lua true
       :vsnip false
@@ -49,14 +50,29 @@
 
 ; LSPInstaller
 (fn setup-servers []
-  (local lspinstall (require :nvim-lsp-installer))
-  (lspinstall.on_server_ready (fn [server]
-                                (var opts { })
+  (local SERVERS ["pyright" "tsserver" "svelte" "sumneko_lua" "clangd"])
+  (local lspinstaller (require :nvim-lsp-installer))
+  (var installedcount 0)
 
-                                (match server.name
-                                  "sumneko_lua" (set opts (setup-lsp-sumneko_lua)))
+  (collect [_ name (ipairs SERVERS)]
+           (do
+             (local (ok server) (lspinstaller.get_server name))
+             (when (and (= ok true) (= (server:is_installed) false))
+               (do
+                 (print (.. "[nvim-lsp-installer]: Installing " name "..."))
+                 (server:install)
+                 (set installedcount (+ installedcount 1))))))
 
-                                (server:setup opts))))
+  (lspinstaller.on_server_ready (fn [server]
+                                  (var opts { })
+
+                                  (match server.name
+                                    "sumneko_lua" (set opts (setup-lsp-sumneko_lua)))
+
+                                  (server:setup opts)
+
+                                  (when (> installedcount 0) ; Show LSP Installation Dialog
+                                    (vim.api.nvim_command ":LspInstallInfo")))))
 
 (setup-servers)
 

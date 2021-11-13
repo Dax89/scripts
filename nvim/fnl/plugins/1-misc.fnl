@@ -1,4 +1,4 @@
-(import-macros {: nv-opt : plugin-setup} "macros")
+(import-macros {: plugin-setup} "macros")
 
 (plugin-setup colorizer setup)
 (plugin-setup trouble setup)
